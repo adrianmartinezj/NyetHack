@@ -14,16 +14,27 @@ fun performPurchase(price: Double){
     displayBalance()
     val totalPurse = playerGold + (playerSilver / 100.0)
     println("Total purse: $totalPurse")
-    println("Purchasing item for $price")
+    if (totalPurse > price) {
+        println("Purchasing item for $price")
 
-    val remainingBalance = totalPurse - price
-    println("Remaining balance: ${"%.2f"}".format(remainingBalance))
+        val remainingBalance = totalPurse - price
+        println("Remaining balance: ${"%.2f"}".format(remainingBalance))
 
-    val remainingGold = remainingBalance.toInt()
-    val remainingSilver = (remainingBalance % 1 * 100).roundToInt()
-    playerGold = remainingGold
-    playerSilver = remainingSilver
+        val remainingGold = remainingBalance.toInt()
+        val remainingSilver = (remainingBalance % 1 * 100).roundToInt()
+        playerGold = remainingGold
+        playerSilver = remainingSilver
+    } else {
+        println("Not enough for transaction!")
+    }
     displayBalance()
+
+
+
+//    val dragonsBreathSize = 5.0
+//    val pintSize = .125
+
+//    println("After 12 pints are sold, there are ${dragonsBreathSize - (pintSize * 12)} gallons left!")
 }
 
 private fun displayBalance(){
