@@ -1,5 +1,6 @@
 import kotlin.math.roundToInt
 import java.io.File
+import java.util.*
 
 const val TAVERN_NAME = "Taernyl's Folly"
 
@@ -13,7 +14,25 @@ val menuList = File("data/tavern-menu-data.txt")
     .readText()
     .split("\n")
 
+fun tavernMenuDisplay(items: List<String>, tavernName: String){
+    println("*** Welcome to $tavernName ***")
+    val categoryList = mutableListOf<String>()
+    for (item in items){
+        val category = item.split(',')[0]
+        val drinkName = item.split(',')[1].capitalize()
+        val price = item.split(',')[2]
+        val drinkString = "$drinkName............$price"
+        categoryList.add(category)
+        categoryList.add(drinkString)
+    }
+    categoryList.toSet().toList()
+    for (catItem in categoryList){
+        println(catItem)
+    }
+}
+
 fun main(args: Array<String>) {
+    tavernMenuDisplay(menuList, TAVERN_NAME)
     if (patronList.contains("Eli")){
         println("The tavern master says: Eli's in the back playing cards.")
     } else {
